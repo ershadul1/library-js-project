@@ -1,23 +1,24 @@
 const myLibrary = [];
 
-function Book(title, author, pagesNum, read) {
-  this.title = title;
-  this.author = author;
-  this.pagesNum = pagesNum;
-  this.read = read;
-}
+const Book = (title, author, pagesNum, read) => {
+  const obj = {
+    title, author, pagesNum, read,
+  };
+
+  const changeBookStatus = () => {
+    if (obj.read) {
+      obj.read = false;
+    } else {
+      obj.read = true;
+    }
+  };
+  obj.changeBookStatus = changeBookStatus;
+  return obj;
+};
 
 function deleteBook(index) {
   myLibrary.splice(index, 1);
 }
-
-Book.prototype.changeBookStatus = function status() {
-  if (this.read) {
-    this.read = false;
-  } else {
-    this.read = true;
-  }
-};
 
 function displayBooks() {
   const allBookNodes = document.querySelectorAll('.book-row');
@@ -32,7 +33,7 @@ function displayBooks() {
     const bookKeys = Object.keys(myLibrary[i]);
     const tableRow = document.createElement('tr');
     tableRow.classList = 'book-row';
-    for (let j = 0; j < bookKeys.length - 1; j += 1) {
+    for (let j = 0; j < bookKeys.length - 2; j += 1) {
       const bookProperty = document.createElement('td');
       const bookPropertyContent = document.createTextNode(myLibrary[i][bookKeys[j]]);
       bookProperty.appendChild(bookPropertyContent);
@@ -75,12 +76,11 @@ function addBookToLibrary() {
     bookStatus = true;
   }
 
-  const newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
+  const newBook = Book(bookTitle, bookAuthor, bookPages, bookStatus);
 
   myLibrary.push(newBook);
   displayBooks();
 }
-
 
 const newBookBtn = document.querySelector('#new-book-btn');
 newBookBtn.onclick = () => { addBookToLibrary(); };
