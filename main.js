@@ -2,17 +2,19 @@ const myLibrary = [];
 
 const Book = (title, author, pagesNum, read) => {
   const obj = {
-    title, author, pagesNum, read,
+    title,
+    author,
+    pagesNum,
+    read,
+    changeBookStatus() {
+      if (obj.read) {
+        obj.read = false;
+      } else {
+        obj.read = true;
+      }
+    },
   };
 
-  const changeBookStatus = () => {
-    if (obj.read) {
-      obj.read = false;
-    } else {
-      obj.read = true;
-    }
-  };
-  obj.changeBookStatus = changeBookStatus;
   return obj;
 };
 
