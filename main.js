@@ -1,20 +1,21 @@
 const myLibrary = [];
 
-const Book = (title, author, pagesNum, read) => {
-  const obj = {
-    title, author, pagesNum, read,
-  };
+class Book {
+  constructor(title, author, pagesNum, read) {
+    this.title = title
+    this.author = author
+    this.pagesNum = pagesNum
+    this.read = read 
+  }
 
-  const changeBookStatus = () => {
-    if (obj.read) {
-      obj.read = false;
+  changeBookStatus() {
+    if (this.read) {
+      this.read = false;
     } else {
-      obj.read = true;
+      this.read = true;
     }
-  };
-  obj.changeBookStatus = changeBookStatus;
-  return obj;
-};
+  }
+}
 
 function deleteBook(index) {
   myLibrary.splice(index, 1);
@@ -76,7 +77,7 @@ function addBookToLibrary() {
     bookStatus = true;
   }
 
-  const newBook = Book(bookTitle, bookAuthor, bookPages, bookStatus);
+  const newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
 
   myLibrary.push(newBook);
   displayBooks();
